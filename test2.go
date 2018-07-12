@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	. "fmt"
 )
 
 const (
@@ -28,7 +28,7 @@ func SumAndProduct(a, b int) (int, int) {
 	return a + b, a * b
 }
 func p(s interface{}) {
-	fmt.Println(s)
+	Println(s)
 }
 func add1(a *int) int {
 	*a = *a + 1
@@ -60,7 +60,31 @@ func filter(slice []int, f testInt) []int {
 	}
 	return result
 }
+func throwPanic(f func()) (b bool) {
+	defer func() {
+		if x := recover(); x != nil {
+			b = true
+		}
+	}()
+	f()
+	return
+}
+
+type person struct {
+	name string
+	age  int
+}
+
 func main() {
+	var ap person
+	ap.name = "aa"
+	ap.age = 22
+	p(ap)
+	// user := os.Getenv("USERaaa")
+	// // throwPanic()
+	// if user == "" {
+	// 	panic("no user env")
+	// }
 	p("-----------將FUNCTION包成參數呼叫---------------")
 	slice := []int{1, 2, 3, 4, 5, 6, 7}
 	odd := filter(slice, isOdd)
@@ -68,13 +92,13 @@ func main() {
 	even := filter(slice, isEven)
 	p(even)
 	p("---------------------------------")
-	fmt.Println(i)
-	fmt.Println(x)
-	fmt.Println(y)
+	Println(i)
+	Println(x)
+	Println(y)
 
-	fmt.Println(z)
+	Println(z)
 	doubleArray := [2][4]int{[4]int{1, 2, 3, 4}, [4]int{5, 6, 7, 8}}
-	fmt.Println(doubleArray[0])
+	Println(doubleArray[0])
 	var a = [10]byte{'a', 'b'}
 	p(string(a[0]))
 	m := make(map[string]string)
@@ -120,7 +144,7 @@ func main() {
 	p(x)
 	p(x1)
 	for i := 0; i < 5; i++ {
-		defer fmt.Printf("%d ", i)
+		defer Printf("%d ", i)
 	}
 
 }
