@@ -30,8 +30,44 @@ func SumAndProduct(a, b int) (int, int) {
 func p(s interface{}) {
 	fmt.Println(s)
 }
+func add1(a *int) int {
+	*a = *a + 1
+	return *a
+}
 
+type testInt func(int) bool
+
+func isOdd(integer int) bool {
+	if integer%2 == 0 {
+		return false
+	}
+	return true
+
+}
+func isEven(integer int) bool {
+	if integer%2 == 0 {
+		return true
+	}
+	return false
+
+}
+func filter(slice []int, f testInt) []int {
+	var result []int
+	for _, value := range slice {
+		if f(value) {
+			result = append(result, value)
+		}
+	}
+	return result
+}
 func main() {
+	p("-----------將FUNCTION包成參數呼叫---------------")
+	slice := []int{1, 2, 3, 4, 5, 6, 7}
+	odd := filter(slice, isOdd)
+	p(odd)
+	even := filter(slice, isEven)
+	p(even)
+	p("---------------------------------")
 	fmt.Println(i)
 	fmt.Println(x)
 	fmt.Println(y)
@@ -80,5 +116,11 @@ func main() {
 	sumxy, meanxy := SumAndProduct(x, y)
 	p(sumxy)
 	p(meanxy)
+	x1 := add1(&x)
+	p(x)
+	p(x1)
+	for i := 0; i < 5; i++ {
+		defer fmt.Printf("%d ", i)
+	}
 
 }
